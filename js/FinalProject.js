@@ -46,7 +46,7 @@ class ResultItem extends React.Component {
 
   componentDidMount() {
     const component = this;
-    const url = `http://api.linkpreview.net/?key=${LP_API_KEY}&q=${this.props.url}`
+    const url = `https://api.linkpreview.net/?key=${LP_API_KEY}&q=${this.props.url}`
 
     jQuery.get(url, data => component.setState(data));
   }
@@ -84,7 +84,7 @@ class ResultTable extends React.Component {
     const date = this.props.date;
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const url = `http://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${NY_API_KEY}`
+    const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${NY_API_KEY}`
 
     jQuery.get(url, data => {
       component.setState({
