@@ -57,7 +57,7 @@ class ResultItem extends React.Component {
       image = <a href={this.props.url} target="_blank"><img src={this.state.image}/></a>
     }
     else {
-      image = <a href={this.props.url} target="_blank"><img src="http://via.placeholder.com/350x150"/></a>
+      image = <a href={this.props.url} target="_blank"><img src="https://via.placeholder.com/350x150"/></a>
     }
     return (
       <div>
