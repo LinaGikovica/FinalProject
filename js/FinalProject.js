@@ -76,6 +76,7 @@ class ResultTable extends React.Component {
     super(props);
 
     this.state = {
+      loaded: false,
       articles: []
     };
   }
@@ -90,12 +91,17 @@ class ResultTable extends React.Component {
 
     jQuery.get(url, data => {
       component.setState({
+        loaded: true,
         articles: data.response.docs.slice(0, 20)
       });
     });
   }
 
   render() {
+      
+    if(!this.state.loaded)
+        return (<div className="spinner"></div>)
+      
     const date = this.props.date;
     const items = [];
     const articles = this.state.articles;
@@ -105,7 +111,7 @@ class ResultTable extends React.Component {
             key={article._id}
             url={article.web_url}
             title={article.headline.main}
-            description={article.abstract}/>
+            description={article.abstract || article.snippet}/>
         );
     });
 
