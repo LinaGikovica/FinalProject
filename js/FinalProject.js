@@ -25,13 +25,15 @@ class SearchBar extends React.Component {
     const dateString = moment(date).format("YYYY-MM");
 
     return (
-      <form>
-        <input 
+    <div className="Search">
+    <p> Choose a month and a year between January 1851 and current date to get selected New York Times articles from that period. Click on image will get you to arcicle page  or digitalised version if it exist, while click on the headline will give you json details. </p>
+      <form className="Form">
+        <input id="mon"
           type="month"
           value={dateString}
           onChange={this.handleDateChange}/>
-        <button>Search</button>
       </form>
+    </div>
     );
   }
 }
@@ -54,13 +56,13 @@ class ResultItem extends React.Component {
   render() {
     let image = null;
     if(this.state.image != null) {
-      image = <a href={this.props.url} target="_blank"><img src={this.state.image}/></a>
+      image = <a href={this.props.url} target="_blank"><img className="articleImage" src={this.state.image}/></a>
     }
     else {
-      image = <a href={this.props.url} target="_blank"><img src="https://via.placeholder.com/350x150"/></a>
+      image = <a href={this.props.url} target="_blank"><img className="articleImage" src="https://i.imgur.com/UFwbr6k.jpg"/></a>
     }
     return (
-      <div>
+      <div className="Item">
         <h2>{this.props.title}</h2>
         {image}
         <p>{this.props.description}</p>
@@ -122,7 +124,7 @@ class App extends React.Component {
     this.handleDateChange = this.handleDateChange.bind(this);
 
     this.state = {
-      searchDate: new Date("2003-01-01")
+      searchDate: new Date
     };
   }
 
@@ -139,10 +141,12 @@ class App extends React.Component {
           searchDate={this.state.searchDate}
           onSearchDateChange={this.handleDateChange}/>
         {/* force key to be unique to force ResultTable to reload data.
-            Forsira pozivanje componentDidMount jer re-kreira komponentu. */}        
-        <ResultTable 
+            Forsira pozivanje componentDidMount jer re-kreira komponentu. */}
+        <div className="Result">
+        <ResultTable
           key={this.state.searchDate}
           date={this.state.searchDate}/>
+        </div>
       </div>
     );
   }
