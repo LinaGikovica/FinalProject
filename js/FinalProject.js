@@ -70,7 +70,7 @@ class ResultItem extends React.Component {
     }
     return (
       <div className="Item">
-        <h2 onClick={ this.handleClick }>{this.props.title}</h2>
+        <h2 onClick={ this.handleClick }><a href="#">{this.props.title} </a></h2>
         {image}
         <p>{this.props.description}</p>
       </div>
@@ -99,7 +99,7 @@ class ResultTable extends React.Component {
     const component = this;
     const date = this.props.date;
     const year = date.getFullYear();
-    const month = date.getMonth() + 1;
+    const month = date.getMonth() + 1; //starts with 0 thus +1 
     const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${NY_API_KEY}`
 
     jQuery.get(url, data => {
@@ -207,7 +207,7 @@ class App extends React.Component {
           searchDate={this.state.searchDate}
           onSearchDateChange={this.handleDateChange}/>
         {/* force key to be unique to force ResultTable to reload data.
-            Forsira pozivanje componentDidMount jer re-kreira komponentu. */}
+            */}
         <div className="Result">
         <ResultTable
           key={this.state.searchDate}
